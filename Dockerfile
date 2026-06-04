@@ -7,10 +7,6 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-ARG FIRECRAWL_API_KEY
-ARG OPENAI_API_KEY
-ENV FIRECRAWL_API_KEY=$FIRECRAWL_API_KEY
-ENV OPENAI_API_KEY=$OPENAI_API_KEY
 RUN npm install -g pnpm && pnpm run build
 
 FROM node:20-alpine AS runner
